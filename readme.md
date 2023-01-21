@@ -1,6 +1,6 @@
-#Project: Bank Statement
+# Project: Bank Statement
 
-##Acceptence Criteria
+## Acceptence Criteria
 
 **Given** a client makes a deposit of 1000 on 10-01-2023  
 **And** a deposit of 2000 on 13-01-2023  
@@ -16,7 +16,7 @@ date || credit || debit || balance
 
 ```
 
-##Class Framework
+## Class Framework
 
 ```javascript
 
@@ -58,7 +58,7 @@ class bankStatement {
 
 ```
 
-##Bank Class Test Examples
+## Bank Class Test Examples
 
 ```javascript
 
@@ -75,7 +75,7 @@ bank.transaction() => ["13-01-2023", "", 500.00];
 
 ```
 
-##BankStatement Class Test Examples
+## BankStatement Class Test Examples
 
 ```javascript
 
