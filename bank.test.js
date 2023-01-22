@@ -6,7 +6,7 @@ describe("Bank class", () => {
 
     const bank = new Bank();
 
-    expect(bank.transaction).toEqual([]);
+    expect(bank.transaction()).toEqual([]);
 
   });
 
