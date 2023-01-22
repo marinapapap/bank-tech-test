@@ -1,7 +1,7 @@
 class Bank {
 
   constructor() {
-    
+    this.transaction = [];
   }
  
 }
