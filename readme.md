@@ -40,7 +40,7 @@ class Bank {
 
 }
 
-class bankStatement {
+class BankStatement {
 
   constructor() {
    
@@ -67,11 +67,11 @@ bank.transaction => [];
 
 const bank = new Bank();
 bank.deposit("13/01/2023", 1000);
-bank.transaction() => ["13-01-2023", 1000.00, ""];
+bank.transaction() => ["13-01-2023", 1000, ""];
 
 const bank = new Bank();
 bank.withdrawal("13/01/2023", 500);
-bank.transaction() => ["13-01-2023", "", 500.00];
+bank.transaction() => ["13-01-2023", "", 500];
 
 ```
 
