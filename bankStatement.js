@@ -8,27 +8,27 @@ class BankStatement {
   addTransaction(record) {
     this.total += record.transaction()[1];
     record.transaction().push(this.total);
-    console.log(record.transaction());
 
-    const array = record.transaction().map(x => {
+    const formattedRecord = this.convertToDecimals(record.transaction());
+    this.transactions.push(formattedRecord);
+  }
 
+  convertToDecimals(record) {
+    return record.map(x => {
       if(Number.isInteger(x)) {
         return x.toFixed(2);
       } else {
         return x;
       };
-
     });
-
-    this.transactions.push(array);
-  }
+  };
 
   statement() {
     this.transactions.push(["date || credit || debit || balance"])
     return this.transactions.map(x =>
         x.join(" || ").replace("  ", " ")
       ).reverse().join("\n");
-  }
-}
+  };
+};
 
 module.exports = BankStatement;
