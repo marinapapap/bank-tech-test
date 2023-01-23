@@ -63,7 +63,7 @@ class BankStatement {
 ```javascript
 
 const bank = new Bank();
-bank.transaction => [];
+bank.transaction() => [];
 
 const bank = new Bank();
 bank.deposit("13/01/2023", 1000);
