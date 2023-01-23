@@ -13,12 +13,11 @@ date || credit || debit || balance
 14/01/2023 || || 500.00 || 2500.00
 13/01/2023 || 2000.00 || || 3000.00
 10/01/2023 || 1000.00 || || 1000.00
-
 ```
 
 ## How To Run
 
-*To install the dependencies, run the following commands (assuming you have Node.js already installed):*
+To install the program and dependencies, run the following commands (assuming you have Node.js already installed):
 
 ```
 git clone https://github.com/marinapapap/bank-tech-test.git
@@ -28,17 +27,17 @@ cd bank-tech-test
 npm install
 ```
 
-*To run the tests, run the following command:*
+To run the tests, run the following command:
 
 ```
 jest
 ```
 
-*To run the program, write the following in the node REPL:*
+To run the program, write the following in the node REPL:
 
 ```
-> const Bank = require('./bank);
-> const BankStatement = require('./bankStatement);
+> const Bank = require('./bank');
+> const BankStatement = require('./bankStatement');
 ```
 
 You should now be able create instances of both classes, within the REPL, to add data and return a bank statement. Once done, you'll want to log the output to the console.
@@ -47,7 +46,7 @@ You should now be able create instances of both classes, within the REPL, to add
 > console.log(bankStatement.statement());
 ```
 
-_screenshot of the program being run in the node REPL can be found in the main directory_
+_A screenshot of the program being run in the node REPL can be found in the main directory._
 
 
 ## Class Framework

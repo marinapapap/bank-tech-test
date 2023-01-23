@@ -2,7 +2,7 @@ class BankStatement {
 
   constructor() {
     this.total = 0;
-    this.transactions = [];
+    this.transactions = [["date || credit || debit || balance"]];
   }
 
   addTransactionWithCurrentBalance(record) {
@@ -31,7 +31,7 @@ class BankStatement {
   }
 
   statement() {
-    this.transactions.push(["date || credit || debit || balance"])
+    this.transactions.push(this.transactions.shift());
     return this.transactions.map(x =>
         x.join(" || ").replace("  ", " ")
       ).reverse().join("\n");
