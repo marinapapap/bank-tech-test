@@ -130,12 +130,12 @@ bank.deposit("10/01/2023", 1000);
 const bank2 = new Bank;
 bank2.deposit("13/01/2023", 2000);
 const bank3 = new Bank;
-bank3.deposit("14/01/2023", 2000);
+bank3.withdrawal("14/01/2023", 500);
 const bankStatement = new BankStatement;
 bankStatement.addTransaction(bank); 
 bankStatement.addTransaction(bank2); 
 bankStatement.addTransaction(bank3); 
-banStatement.statement() => "date || credit || debit || balance\n14-01-2023 || || 500.00 || 2500.00\n13-01-2023 || 2000.00 || || 3000.00\n10-01-2023 || 1000.00 || || 1000.00"
+bankStatement.statement() => "date || credit || debit || balance\n14-01-2023 || || 500.00 || 2500.00\n13-01-2023 || 2000.00 || || 3000.00\n10-01-2023 || 1000.00 || || 1000.00"
 
 ```
 

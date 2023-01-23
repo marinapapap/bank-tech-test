@@ -6,8 +6,9 @@ class BankStatement {
   }
 
   addTransaction(record) {
-    this.total += record.transaction()[1];
-    this.total -= record.transaction()[2];
+    this.total += record.transaction()[1]; // adds deposits
+    this.total -= record.transaction()[2]; // subtracts withdrawals
+
     record.transaction().push(this.total);
 
     const formattedRecord = this.convertToDecimals(record.transaction());
