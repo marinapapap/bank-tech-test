@@ -86,12 +86,12 @@ bankStatement.statement() => "date || credit || debit || balance"
 
 const bankMock = { 
   transaction() {
-    return ["10-01-2023", 1000.00, ""];
+    return ["10-01-2023", 1000, ""];
   };
 };
 const bankStatement = new BankStatement;
 bankStatement.addTransaction(bankMock); 
-banStatement.statement() => "date || credit || debit || balance\n10-01-2023 || 1000.00 || || 1000.00"
+bankStatement.statement() => "date || credit || debit || balance\n10-01-2023 || 1000.00 || || 1000.00"
 
 const bankMock = { 
   transaction() {

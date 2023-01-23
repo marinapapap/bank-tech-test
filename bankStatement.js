@@ -1,3 +1,5 @@
+const Bank = require("./bank");
+
 class BankStatement {
 
   constructor() {
@@ -12,6 +14,7 @@ class BankStatement {
     record.transaction().push(this.total);
 
     const formattedRecord = this.convertToDecimals(record.transaction());
+    console.log(formattedRecord);
     this.transactions.push(formattedRecord);
   }
 
