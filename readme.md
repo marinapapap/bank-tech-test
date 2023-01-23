@@ -80,10 +80,19 @@ class BankStatement {
     // the BankStatement class takes the Bank records and accumalates them into one formatted bank statement
   }
 
-  addTransaction(record) {
+  addTransactionWithCurrentBalance(record) {
     // a record is added as an instance of the Bank class
+    // this is then stored in the BankStament class 
+    // with the current balance after this transaction
+  }
+
+  calculateCurrentBalance(record) {
     // depending on wether the record (array) has a value at the 2nd or 3rd postion 
     // will determine whether money is added or subtracted from the current balance
+  }
+
+  convertToDecimals(record) {
+    // converts any numerical value to appear with 2 decimal places
   }
 
   statement() {
