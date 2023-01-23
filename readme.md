@@ -100,7 +100,7 @@ const bankMock = {
 };
 const bankStatement = new BankStatement;
 bankStatement.addTransaction(bankMock); 
-banStatement.statement() => "date || credit || debit || balance\n14-01-2023 || 500.00 || || -500.00"
+bankStatement.statement() => "date || credit || debit || balance\n14-01-2023 || ||  500.00 || -500.00"
 
 // integrated tests
 

@@ -25,6 +25,20 @@ describe("BankStatement class", () => {
       expect(bankStatement.statement()).toEqual("date || credit || debit || balance\n10-01-2023 || 1000.00 || || 1000.00");
 
     });
+
+    it("Unit test included mock of Bank class. Given a withdrawal, a formatted statement is returned", () => {
+
+      const bankMock = { 
+        transaction() {
+          return ["14-01-2023", "", 500.00];
+        }
+      };
+
+      const bankStatement = new BankStatement;
+      bankStatement.addTransaction(bankMock); 
+
+      expect(bankStatement.statement()).toEqual("date || credit || debit || balance\n14-01-2023 || || 500.00 || -500.00");
+    });
   });
 
   describe("integrated tests", () => {
