@@ -11,10 +11,10 @@ class BankStatement {
     this.total += record.transaction()[1]; // adds deposits
     this.total -= record.transaction()[2]; // subtracts withdrawals
 
-    record.transaction().push(this.total);
+    const updatedRecord = record.transaction();
+    updatedRecord.push(this.total);
 
-    const formattedRecord = this.convertToDecimals(record.transaction());
-    console.log(formattedRecord);
+    const formattedRecord = this.convertToDecimals(updatedRecord);
     this.transactions.push(formattedRecord);
   }
 
