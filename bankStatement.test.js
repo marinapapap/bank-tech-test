@@ -13,7 +13,7 @@ describe("BankStatement class", () => {
   });
 
   describe("integrated tests", () => {
-    it("", () => {
+    it("takes a deposit from the bank class and returns data formatted on a new line after the headings", () => {
       
       const bank = new Bank;
       bank.deposit("10/01/2023", 1000);
