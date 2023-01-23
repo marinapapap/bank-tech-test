@@ -36,12 +36,16 @@ jest
 
 *To run the program, write the following in the node REPL:*
 
-```node
+```
 > const Bank = require('./bank);
 > const BankStatement = require('./bankStatement);
 ```
 
-You should now be able create instances of both classes, within the REPL, to add data and return a bank statement.
+You should now be able create instances of both classes, within the REPL, to add data and return a bank statement. Once done, you'll want to log the output to the console.
+
+```
+> console.log(bankStatement.statement());
+```
 
 _screenshot of the program being run in the node REPL can be found in the main directory_
 
@@ -123,7 +127,7 @@ const bankMock = {
   };
 };
 const bankStatement = new BankStatement;
-bankStatement.addTransaction(bankMock); 
+bankStatement.addTransactionWithCurrentBalance(bankMock); 
 bankStatement.statement() => "date || credit || debit || balance\n10-01-2023 || 1000.00 || || 1000.00"
 
 const bankMock = { 
@@ -132,7 +136,7 @@ const bankMock = {
   };
 };
 const bankStatement = new BankStatement;
-bankStatement.addTransaction(bankMock); 
+bankStatement.addTransactionWithCurrentBalance(bankMock); 
 bankStatement.statement() => "date || credit || debit || balance\n14-01-2023 || ||  500.00 || -500.00"
 
 // integrated tests
@@ -140,13 +144,13 @@ bankStatement.statement() => "date || credit || debit || balance\n14-01-2023 || 
 const bank = new Bank;
 bank.deposit("10/01/2023", 1000);
 const bankStatement = new BankStatement;
-bankStatement.addTransaction(bank); 
+bankStatement.addTransactionWithCurrentBalance(bank); 
 bankStatement.statement() => "date || credit || debit || balance\n10-01-2023 || 1000.00 || || 1000.00"
 
 const bank = new Bank;
 bank.withdrawal("14/01/2023", 500);
 const bankStatement = new BankStatement;
-bankStatement.addTransaction(bank); 
+bankStatement.addTransactionWithCurrentBalance(bank); 
 bankStatement.statement() => "date || credit || debit || balance\n14-01-2023 ||  || 500.00 || -500.00"
 
 const bank = new Bank;
@@ -154,8 +158,8 @@ bank.deposit("10/01/2023", 1000);
 const bank2 = new Bank;
 bank2.deposit("13/01/2023", 2000);
 const bankStatement = new BankStatement;
-bankStatement.addTransaction(bank); 
-bankStatement.addTransaction(bank2); 
+bankStatement.addTransactionWithCurrentBalance(bank); 
+bankStatement.addTransactionWithCurrentBalance(bank2); 
 bankStatement.statement() => "date || credit || debit || balance\n13-01-2023 || 2000.00 || || 3000.00\n10-01-2023 || 1000.00 || || 1000.00"
 
 const bank = new Bank;
@@ -165,9 +169,9 @@ bank2.deposit("13/01/2023", 2000);
 const bank3 = new Bank;
 bank3.withdrawal("14/01/2023", 500);
 const bankStatement = new BankStatement;
-bankStatement.addTransaction(bank); 
-bankStatement.addTransaction(bank2); 
-bankStatement.addTransaction(bank3); 
+bankStatement.addTransactionWithCurrentBalance(bank); 
+bankStatement.addTransactionWithCurrentBalance(bank2); 
+bankStatement.addTransactionWithCurrentBalance(bank3); 
 bankStatement.statement() => "date || credit || debit || balance\n14-01-2023 || || 500.00 || 2500.00\n13-01-2023 || 2000.00 || || 3000.00\n10-01-2023 || 1000.00 || || 1000.00"
 
 ```
