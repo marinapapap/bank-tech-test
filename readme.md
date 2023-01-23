@@ -108,7 +108,7 @@ const bank = new Bank;
 bank.deposit("10/01/2023", 1000);
 const bankStatement = new BankStatement;
 bankStatement.addTransaction(bank); 
-banStatement.statement() => "date || credit || debit || balance\n10-01-2023 || 1000.00 || || 1000.00"
+bankStatement.statement() => "date || credit || debit || balance\n10-01-2023 || 1000.00 || || 1000.00"
 
 const bank = new Bank;
 bank.withdrawal("14/01/2023", 500);

@@ -1,11 +1,28 @@
 const BankStatement = require('./bankStatement');
+const Bank = require('./bank');
 
 describe("BankStatement class", () => {
-  it("Statement() returns only the statement headings", () => {
+  describe("unit tests", () => {
+    it("Statement() returns only the statement headings", () => {
 
-    const bankStatement = new BankStatement;
-    
-    expect(bankStatement.statement()).toEqual("date || credit || debit || balance");
+      const bankStatement = new BankStatement;
 
+      expect(bankStatement.statement()).toEqual("date || credit || debit || balance");
+
+    });
   });
+
+  describe("integrated tests", () => {
+    it("", () => {
+      
+      const bank = new Bank;
+      bank.deposit("10/01/2023", 1000);
+
+      const bankStatement = new BankStatement;
+      bankStatement.addTransaction(bank); 
+
+      expect(bankStatement.statement()).toEqual("date || credit || debit || balance\n10-01-2023 || 1000.00 || || 1000.00");
+
+    })
+  })
 });
