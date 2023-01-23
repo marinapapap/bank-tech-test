@@ -20,7 +20,7 @@ describe("BankStatement class", () => {
       };
 
       const bankStatement = new BankStatement;
-      bankStatement.addTransaction(bankMock); 
+      bankStatement.addTransactionWithCurrentBalance(bankMock); 
       
       expect(bankStatement.statement()).toEqual("date || credit || debit || balance\n10-01-2023 || 1000.00 || || 1000.00");
 
@@ -35,7 +35,7 @@ describe("BankStatement class", () => {
       };
 
       const bankStatement = new BankStatement;
-      bankStatement.addTransaction(bankMock); 
+      bankStatement.addTransactionWithCurrentBalance(bankMock); 
 
       expect(bankStatement.statement()).toEqual("date || credit || debit || balance\n14-01-2023 || || 500.00 || -500.00");
     });
@@ -48,7 +48,7 @@ describe("BankStatement class", () => {
       bank.deposit("10/01/2023", 1000);
 
       const bankStatement = new BankStatement;
-      bankStatement.addTransaction(bank); 
+      bankStatement.addTransactionWithCurrentBalance(bank); 
 
       expect(bankStatement.statement()).toEqual("date || credit || debit || balance\n10-01-2023 || 1000.00 || || 1000.00");
 
@@ -60,7 +60,7 @@ describe("BankStatement class", () => {
       bank.withdrawal("14/01/2023", 500);
 
       const bankStatement = new BankStatement;
-      bankStatement.addTransaction(bank); 
+      bankStatement.addTransactionWithCurrentBalance(bank); 
 
       expect(bankStatement.statement()).toEqual("date || credit || debit || balance\n14-01-2023 || || 500.00 || -500.00");
 
@@ -74,8 +74,8 @@ describe("BankStatement class", () => {
       bank2.deposit("13/01/2023", 2000);
 
       const bankStatement = new BankStatement;
-      bankStatement.addTransaction(bank); 
-      bankStatement.addTransaction(bank2); 
+      bankStatement.addTransactionWithCurrentBalance(bank); 
+      bankStatement.addTransactionWithCurrentBalance(bank2); 
 
       expect(bankStatement.statement()).toEqual("date || credit || debit || balance\n13-01-2023 || 2000.00 || || 3000.00\n10-01-2023 || 1000.00 || || 1000.00");
 
@@ -91,9 +91,9 @@ describe("BankStatement class", () => {
       bank3.withdrawal("14/01/2023", 500);
 
       const bankStatement = new BankStatement;
-      bankStatement.addTransaction(bank); 
-      bankStatement.addTransaction(bank2); 
-      bankStatement.addTransaction(bank3); 
+      bankStatement.addTransactionWithCurrentBalance(bank); 
+      bankStatement.addTransactionWithCurrentBalance(bank2); 
+      bankStatement.addTransactionWithCurrentBalance(bank3); 
 
       expect(bankStatement.statement()).toEqual("date || credit || debit || balance\n14-01-2023 || || 500.00 || 2500.00\n13-01-2023 || 2000.00 || || 3000.00\n10-01-2023 || 1000.00 || || 1000.00");
 

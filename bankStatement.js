@@ -5,15 +5,19 @@ class BankStatement {
     this.transactions = [];
   }
 
-  addTransaction(record) {
-    this.total += record.transaction()[1]; // adds deposits
-    this.total -= record.transaction()[2]; // subtracts withdrawals
+  addTransactionWithCurrentBalance(record) {
+    this.calculateCurrentBalance(record);
 
     const updatedRecord = record.transaction();
     updatedRecord.push(this.total);
 
     const formattedRecord = this.convertToDecimals(updatedRecord);
     this.transactions.push(formattedRecord);
+  }
+
+  calculateCurrentBalance(record) {
+    this.total += record.transaction()[1]; // adds deposits
+    this.total -= record.transaction()[2]; // subtracts withdrawals
   }
 
   convertToDecimals(record) {
