@@ -1,5 +1,3 @@
-const Bank = require("./bank");
-
 class BankStatement {
 
   constructor() {
@@ -24,16 +22,16 @@ class BankStatement {
         return x.toFixed(2);
       } else {
         return x;
-      };
+      }
     });
-  };
+  }
 
   statement() {
     this.transactions.push(["date || credit || debit || balance"])
     return this.transactions.map(x =>
         x.join(" || ").replace("  ", " ")
       ).reverse().join("\n");
-  };
-};
+  }
+}
 
 module.exports = BankStatement;
