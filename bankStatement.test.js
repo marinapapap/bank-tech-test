@@ -23,6 +23,17 @@ describe("BankStatement class", () => {
 
       expect(bankStatement.statement()).toEqual("date || credit || debit || balance\n10-01-2023 || 1000.00 || || 1000.00");
 
-    })
-  })
+    });
+
+    it("takes a withdrawal from the bank and returns data formatted on a new line after the headings", () => {
+
+      const bank = new Bank;
+      bank.withdrawal("14/01/2023", 500);
+
+      const bankStatement = new BankStatement;
+      bankStatement.addTransaction(bank); 
+
+      expect(bankStatement.statement()).toEqual("date || credit || debit || balance\n14-01-2023 || || 500.00 || -500.00");
+    });
+  });
 });
