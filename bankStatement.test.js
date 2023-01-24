@@ -11,11 +11,11 @@ describe("BankStatement class", () => {
 
     });
 
-    xit("Unit test included mock of Bank class. Given a deposit, a formatted statement is returned", () => {
+    it("Unit test included mock of Bank class. Given a deposit, a formatted statement is returned", () => {
 
       const bankMock = { 
         transaction() {
-          return ["10-01-2023", 1000, ""];
+          return [{ date: "10-01-2023", deposit: "1000.00", withdrawal: "", balance: "1000.00" }];
         }
       };
 
@@ -26,11 +26,11 @@ describe("BankStatement class", () => {
 
     });
 
-    xit("Unit test included mock of Bank class. Given a withdrawal, a formatted statement is returned", () => {
+    it("Unit test included mock of Bank class. Given a withdrawal, a formatted statement is returned", () => {
 
       const bankMock = { 
         transaction() {
-          return ["14-01-2023", "", 500.00];
+          return [{ date: "14-01-2023", deposit: "", withdrawal: "500.00", balance: "-500.00" }];
         }
       };
 
@@ -42,7 +42,7 @@ describe("BankStatement class", () => {
   });
 
   describe("integrated tests", () => {
-    xit("takes a deposit from the bank class and returns data formatted on a new line after the headings", () => {
+    it("takes a deposit from the bank class and returns data formatted on a new line after the headings", () => {
       
       const bank = new Bank;
       bank.deposit("10/01/2023", 1000);
@@ -54,7 +54,7 @@ describe("BankStatement class", () => {
 
     });
 
-    xit("takes a withdrawal from the bank and returns data formatted on a new line after the headings", () => {
+    it("takes a withdrawal from the bank and returns data formatted on a new line after the headings", () => {
 
       const bank = new Bank;
       bank.withdrawal("14/01/2023", 500);
@@ -66,22 +66,20 @@ describe("BankStatement class", () => {
 
     });
 
-    xit("takes two deposits from the bank, returns formatted data with the total balance calculated on each line of the statement", () => {
+    it("takes two deposits from the bank, returns formatted data with the total balance calculated on each line of the statement", () => {
 
       const bank = new Bank;
       bank.deposit("10/01/2023", 1000);
-      const bank2 = new Bank;
-      bank2.deposit("13/01/2023", 2000);
+      bank.deposit("13/01/2023", 2000);
 
       const bankStatement = new BankStatement;
       bankStatement.addRecordsWithCurrentBalance(bank); 
-      bankStatement.addRecordsWithCurrentBalance(bank2); 
 
       expect(bankStatement.statement()).toEqual("date || credit || debit || balance\n13-01-2023 || 2000.00 || || 3000.00\n10-01-2023 || 1000.00 || || 1000.00");
 
     });
 
-    it("takes two deposits and a withdrawal in one instance of the Bank class, returns formatted data with the total balance calculated on each line of the statement", () => {
+    it("takes two deposits and a withdrawal, returns formatted data with the total balance calculated on each line of the statement", () => {
 
       const bank = new Bank;
       bank.deposit("10/01/2023", 1000);
