@@ -7,7 +7,7 @@ describe("BankStatement class", () => {
 
       const bankStatement = new BankStatement;
 
-      expect(bankStatement.statement()).toEqual("date || credit || debit || balance");
+      expect(bankStatement.statement()).toEqual("");
 
     });
 

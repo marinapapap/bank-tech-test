@@ -2,7 +2,7 @@ class BankStatement {
 
   constructor() {
     this.total = 0;
-    this.bankStatementData = [["date || credit || debit || balance"]];
+    this.bankStatementData = [];
   }
 
   addRecords(records) {
@@ -21,6 +21,8 @@ class BankStatement {
       // updatedRecord.push(this.total)
       this.bankStatementData.push(updatedRecord);
     })
+
+    this.bankStatementData.push(["date || credit || debit || balance"]);
   }
 
   // calculateCurrentBalance(record) {
@@ -41,7 +43,7 @@ class BankStatement {
   }
 
   statement() {
-    this.bankStatementData.push(this.bankStatementData.shift());
+    // this.bankStatementData.push(this.bankStatementData.shift());
     return this.bankStatementData.map(x =>
         x.join(" || ").replace("  ", " ")
       ).reverse().join("\n");
