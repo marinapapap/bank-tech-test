@@ -5,30 +5,37 @@ class BankStatement {
     this.transactions = [["date || credit || debit || balance"]];
   }
 
-  addTransactionWithCurrentBalance(record) {
-    this.calculateCurrentBalance(record);
+  addRecordsWithCurrentBalance(records) {
+    const allRecords = records.transaction();
 
-    const updatedRecord = record.transaction();
-    updatedRecord.push(this.total);
+    allRecords.map ( (record) => {
+      let updatedRecord = ["", "", ""]
+      
+      updatedRecord[0] = record.date
+      updatedRecord[1] = record.deposit
+      updatedRecord[2] = record.withdrawal
 
-    const formattedRecord = this.convertToDecimals(updatedRecord);
-    this.transactions.push(formattedRecord);
+      this.calculateCurrentBalance(record)
+      updatedRecord.push(this.total);
+      this.transactions.push(updatedRecord);
+    })
   }
 
   calculateCurrentBalance(record) {
-    this.total += record.transaction()[1]; // adds deposits
-    this.total -= record.transaction()[2]; // subtracts withdrawals
+      this.total += record.deposit; 
+      this.total -= record.withdrawal; 
   }
 
-  convertToDecimals(record) {
-    return record.map(x => {
-      if(Number.isInteger(x)) {
-        return x.toFixed(2);
-      } else {
-        return x;
-      }
-    });
-  }
+  // convertToDecimals(record) {
+  //   if(Number.isInteger(record.deposit)) {
+  //     record.deposit == record.deposit.toFixed(2);
+  //   } else if(Number.isInteger(record.withdrawal)) {
+  //     return record.withdrawal.toFixed(2);
+  //   } else {
+  //     return record;
+  //   }
+  
+  // }
 
   statement() {
     this.transactions.push(this.transactions.shift());
