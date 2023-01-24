@@ -14,9 +14,10 @@ class BankStatement {
       updatedRecord[0] = record.date
       updatedRecord[1] = record.deposit
       updatedRecord[2] = record.withdrawal
-
-      this.calculateCurrentBalance(record)
-      updatedRecord.push(this.total);
+      updatedRecord[3] = record.balance;
+     
+      // this.calculateCurrentBalance(record)
+      // updatedRecord.push(this.total)
       this.transactions.push(updatedRecord);
     })
   }
@@ -26,15 +27,15 @@ class BankStatement {
       this.total -= record.withdrawal; 
   }
 
-  // convertToDecimals(record) {
+  // convertToDecimals(updatedRecord, record) {
   //   if(Number.isInteger(record.deposit)) {
-  //     record.deposit == record.deposit.toFixed(2);
+  //     console.log(record.deposit)
+  //     updatedRecord[1] = record.deposit.toFixed(2);
   //   } else if(Number.isInteger(record.withdrawal)) {
-  //     return record.withdrawal.toFixed(2);
+  //     updatedRecord[2] = record.deposit.toFixed(2);
   //   } else {
   //     return record;
   //   }
-  
   // }
 
   statement() {
