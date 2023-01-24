@@ -27,7 +27,7 @@ class Bank {
     this.records.push(record);
   }
 
-  transaction() {
+  returnRecords() {
     return this.records;
   }
  

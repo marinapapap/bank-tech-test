@@ -14,13 +14,13 @@ describe("BankStatement class", () => {
     it("Unit test included mock of Bank class. Given a deposit, a formatted statement is returned", () => {
 
       const bankMock = { 
-        transaction() {
+        returnRecords() {
           return [{ date: "10-01-2023", deposit: "1000.00", withdrawal: "", balance: "1000.00" }];
         }
       };
 
       const bankStatement = new BankStatement;
-      bankStatement.addRecordsWithCurrentBalance(bankMock); 
+      bankStatement.addRecords(bankMock); 
       
       expect(bankStatement.statement()).toEqual("date || credit || debit || balance\n10-01-2023 || 1000.00 || || 1000.00");
 
@@ -29,13 +29,13 @@ describe("BankStatement class", () => {
     it("Unit test included mock of Bank class. Given a withdrawal, a formatted statement is returned", () => {
 
       const bankMock = { 
-        transaction() {
+        returnRecords() {
           return [{ date: "14-01-2023", deposit: "", withdrawal: "500.00", balance: "-500.00" }];
         }
       };
 
       const bankStatement = new BankStatement;
-      bankStatement.addRecordsWithCurrentBalance(bankMock); 
+      bankStatement.addRecords(bankMock); 
 
       expect(bankStatement.statement()).toEqual("date || credit || debit || balance\n14-01-2023 || || 500.00 || -500.00");
     });
@@ -48,7 +48,7 @@ describe("BankStatement class", () => {
       bank.deposit("10/01/2023", 1000);
 
       const bankStatement = new BankStatement;
-      bankStatement.addRecordsWithCurrentBalance(bank); 
+      bankStatement.addRecords(bank); 
 
       expect(bankStatement.statement()).toEqual("date || credit || debit || balance\n10-01-2023 || 1000.00 || || 1000.00");
 
@@ -60,7 +60,7 @@ describe("BankStatement class", () => {
       bank.withdrawal("14/01/2023", 500);
 
       const bankStatement = new BankStatement;
-      bankStatement.addRecordsWithCurrentBalance(bank); 
+      bankStatement.addRecords(bank); 
 
       expect(bankStatement.statement()).toEqual("date || credit || debit || balance\n14-01-2023 || || 500.00 || -500.00");
 
@@ -73,7 +73,7 @@ describe("BankStatement class", () => {
       bank.deposit("13/01/2023", 2000);
 
       const bankStatement = new BankStatement;
-      bankStatement.addRecordsWithCurrentBalance(bank); 
+      bankStatement.addRecords(bank); 
 
       expect(bankStatement.statement()).toEqual("date || credit || debit || balance\n13-01-2023 || 2000.00 || || 3000.00\n10-01-2023 || 1000.00 || || 1000.00");
 
@@ -87,7 +87,23 @@ describe("BankStatement class", () => {
       bank.withdrawal("14/01/2023", 500);
 
       const bankStatement = new BankStatement;
-      bankStatement.addRecordsWithCurrentBalance(bank); 
+      bankStatement.addRecords(bank); 
+
+      expect(bankStatement.statement()).toEqual("date || credit || debit || balance\n14-01-2023 || || 500.00 || 2500.00\n13-01-2023 || 2000.00 || || 3000.00\n10-01-2023 || 1000.00 || || 1000.00");
+
+    });
+
+    it("takes two deposits and a withdrawal, returns formatted data with the total balance calculated on each line of the statement", () => {
+
+      const bank = new Bank;
+      bank.deposit("10/01/2023", 1000);
+      bank.deposit("13/01/2023", 2000);
+      bank.withdrawal("14/01/2023", 500);
+
+      const bankStatement = new BankStatement;
+      bankStatement.addRecords(bank); 
+
+      bankStatement.statement()
 
       expect(bankStatement.statement()).toEqual("date || credit || debit || balance\n14-01-2023 || || 500.00 || 2500.00\n13-01-2023 || 2000.00 || || 3000.00\n10-01-2023 || 1000.00 || || 1000.00");
 

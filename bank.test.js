@@ -6,7 +6,7 @@ describe("Bank class", () => {
 
     const bank = new Bank();
 
-    expect(bank.transaction()).toEqual([]);
+    expect(bank.returnRecords()).toEqual([]);
 
   });
 
@@ -16,7 +16,7 @@ describe("Bank class", () => {
 
     bank.deposit("13/01/2023", 1000);
 
-    expect(bank.transaction()[0]).toEqual({ date: "13-01-2023", deposit: "1000.00", withdrawal: "", balance: "1000.00" });
+    expect(bank.returnRecords()[0]).toEqual({ date: "13-01-2023", deposit: "1000.00", withdrawal: "", balance: "1000.00" });
 
   });
 
@@ -27,7 +27,7 @@ describe("Bank class", () => {
 
     bank.withdrawal("13/01/2023", 500);
 
-    expect(bank.transaction()[0]).toEqual({ date: "13-01-2023", deposit: "", withdrawal: "500.00", balance: "-500.00" });
+    expect(bank.returnRecords()[0]).toEqual({ date: "13-01-2023", deposit: "", withdrawal: "500.00", balance: "-500.00" });
 
   });
 
@@ -39,8 +39,8 @@ describe("Bank class", () => {
     bank.deposit("13/01/2023", 2000);
     bank.withdrawal("14/01/2023", 500);
 
-    expect(bank.transaction()[0]).toEqual({ date: "10-01-2023", deposit: "1000.00", withdrawal: "", balance: "1000.00" });
-    expect(bank.transaction()[2]).toEqual({ date: "14-01-2023", deposit: "", withdrawal: "500.00", balance: "2500.00" });
+    expect(bank.returnRecords()[0]).toEqual({ date: "10-01-2023", deposit: "1000.00", withdrawal: "", balance: "1000.00" });
+    expect(bank.returnRecords()[2]).toEqual({ date: "14-01-2023", deposit: "", withdrawal: "500.00", balance: "2500.00" });
 
   });
 
@@ -52,11 +52,11 @@ describe("Bank class", () => {
     bank.deposit("13/01/2023", 2000);
     bank.withdrawal("14/01/2023", 500);
 
-    expect(bank.transaction()[0]).toEqual({ date: "10-01-2023", deposit: "1000.00", withdrawal: "", balance: "1000.00" });
-    expect(bank.transaction()[2]).toEqual({ date: "14-01-2023", deposit: "", withdrawal:"500.00", balance:"2500.00" });
+    expect(bank.returnRecords()[0]).toEqual({ date: "10-01-2023", deposit: "1000.00", withdrawal: "", balance: "1000.00" });
+    expect(bank.returnRecords()[2]).toEqual({ date: "14-01-2023", deposit: "", withdrawal:"500.00", balance:"2500.00" });
 
     bank.withdrawal("17/01/2023", 500);
 
-    expect(bank.transaction()[3]).toEqual({ date: "17-01-2023", deposit: "", withdrawal: "500.00", balance: "2000.00" });
+    expect(bank.returnRecords()[3]).toEqual({ date: "17-01-2023", deposit: "", withdrawal: "500.00", balance: "2000.00" });
   });
 });
