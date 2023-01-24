@@ -16,7 +16,7 @@ describe("Bank class", () => {
 
     bank.deposit("13/01/2023", 1000);
 
-    expect(bank.transaction()).toEqual(["13-01-2023", 1000, ""]);
+    expect(bank.transaction()).toEqual([{ date: "13-01-2023", deposit: 1000, withdrawal: ""}]);
 
   });
 
@@ -27,7 +27,20 @@ describe("Bank class", () => {
 
     bank.withdrawal("13/01/2023", 500);
 
-    expect(bank.transaction()).toEqual(["13-01-2023", "", 500]);
+    expect(bank.transaction()).toEqual([{ date: "13-01-2023", deposit: "", withdrawal: 500}]);
+
+  });
+
+  it("adds a withdrawal value with the date and returns data in a 3 element array (positons 2 and 0 respectively)", () => {
+
+    const bank = new Bank();
+
+    bank.deposit("10/01/2023", 1000);
+    bank.deposit("13/01/2023", 2000);
+    bank.withdrawal("14/01/2023", 500);
+
+    expect(bank.transaction()[0]).toEqual({ date: "10-01-2023", deposit: 1000, withdrawal: ""});
+    expect(bank.transaction()[2]).toEqual({ date: "14-01-2023", deposit: "", withdrawal: 500});
 
   });
 });

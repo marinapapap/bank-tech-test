@@ -1,23 +1,27 @@
 class Bank {
 
   constructor() {
-    this.record = [];
+    this.records = [];
   }
 
   deposit(date, value) {
-    this.record[0] = date.split("/").join("-");
-    this.record[1] = value;
-    this.record[2] = "";
+    const record = {}
+    record.date = date.split("/").join("-");
+    record.deposit = value;
+    record.withdrawal = "";
+    this.records.push(record);
   }
 
   withdrawal(date, value) {
-    this.record[0] = date.split("/").join("-");
-    this.record[1] = "";
-    this.record[2] = value;
+    const record = {}
+    record.date = date.split("/").join("-");
+    record.deposit = "";
+    record.withdrawal = value;
+    this.records.push(record);
   }
 
   transaction() {
-    return this.record;
+    return this.records;
   }
  
 }
