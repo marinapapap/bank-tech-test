@@ -15,7 +15,7 @@ describe("BankStatement class", () => {
 
       const bankMock = { 
         returnRecords() {
-          return [{ date: "10-01-2023", deposit: "1000.00", withdrawal: "", balance: "1000.00" }];
+          return [{ date: "10-01-2023", deposit: 1000, withdrawal: "", balance: 1000 }];
         }
       };
 
@@ -30,7 +30,7 @@ describe("BankStatement class", () => {
 
       const bankMock = { 
         returnRecords() {
-          return [{ date: "14-01-2023", deposit: "", withdrawal: "500.00", balance: "-500.00" }];
+          return [{ date: "14-01-2023", deposit: "", withdrawal: 500, balance: -500 }];
         }
       };
 
@@ -93,7 +93,7 @@ describe("BankStatement class", () => {
 
     });
 
-    it("takes two deposits and a withdrawal, returns formatted data with the total balance calculated on each line of the statement", () => {
+    it("takes two deposits and a withdrawal, calls statement() twice", () => {
 
       const bank = new Bank;
       bank.deposit("10/01/2023", 1000);

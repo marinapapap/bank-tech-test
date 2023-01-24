@@ -9,10 +9,10 @@ class Bank {
     const record = {}
     this.currentBalance += value;
 
-    record.date = date.split("/").join("-");
-    record.deposit = value.toFixed(2);
+    record.date = date;
+    record.deposit = value;
     record.withdrawal = "";
-    record.balance = this.currentBalance.toFixed(2);
+    record.balance = this.currentBalance;
     this.records.push(record);
   }
 
@@ -20,10 +20,10 @@ class Bank {
     const record = {}
     this.currentBalance -= value;
 
-    record.date = date.split("/").join("-");
+    record.date = date;
     record.deposit = "";
-    record.withdrawal = value.toFixed(2);
-    record.balance = this.currentBalance.toFixed(2);
+    record.withdrawal = value;
+    record.balance = this.currentBalance;
     this.records.push(record);
   }
 
