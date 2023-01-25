@@ -44,6 +44,7 @@ Then write the following in the node REPL:
 ```
 > const Bank = require('./bank');
 > const BankStatement = require('./bankStatement');
+> const FormatBankRecords = require('./formatBankRecords');
 ```
 
 You should now be able create instances of both classes, within the REPL, to add data and return a bank statement. Once done, you'll want to log the output to the console.

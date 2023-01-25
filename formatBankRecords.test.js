@@ -1,4 +1,4 @@
-const FormatRecords = require('./formatRecords');
+const FormatBankRecords = require('./formatBankRecords');
 const Bank = require('./bank');
 
 describe("", () => {
@@ -8,9 +8,9 @@ describe("", () => {
 
     bank.withdrawal("13/01/2023", 500);
 
-    const formatRecords = new FormatRecords(bank);
+    const formatRecords = new FormatBankRecords(bank);
 
-    expect(formatRecords.bankRecords[0]).toEqual({ date: "13/01/2023", deposit: "", withdrawal: 500, balance: -500 })
+    expect(formatRecords.bankRecords[0]).toEqual({ date: "13/01/2023", deposit: "", withdrawal: 500, balance: -500 });
   })
 
   it("takes an instance of Bank and returns formatted records", () => {
@@ -19,7 +19,7 @@ describe("", () => {
 
     bank.withdrawal("13/01/2023", 500);
 
-    const formatRecords = new FormatRecords(bank);
+    const formatRecords = new FormatBankRecords(bank);
 
     formatRecords.formatter();
 
@@ -33,12 +33,12 @@ describe("", () => {
     bank.deposit("10/01/2023", 1000);
     bank.deposit("13/01/2023", 2000);
 
-    const formatRecords = new FormatRecords(bank);
+    const formatRecords = new FormatBankRecords(bank);
     formatRecords.formatter()
 
     bank.withdrawal("14/01/2023", 500);
 
-    formatRecords.formatter()
+    formatRecords.formatter();
 
     expect(formatRecords.returnFormattedRecords()[0]).toEqual(["10-01-2023", "1000.00", "", "1000.00"]);
     expect(formatRecords.returnFormattedRecords()[2]).toEqual(["14-01-2023", "", "500.00", "2500.00"]);

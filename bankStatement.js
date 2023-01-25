@@ -1,4 +1,4 @@
-const FormatRecords = require('./formatRecords');
+const FormatBankRecords = require('./formatBankRecords');
 
 class BankStatement {
 
@@ -10,15 +10,19 @@ class BankStatement {
   addRecords(records) {
     this.bankStatementData = [];
 
-    const formatRecords = new FormatRecords(records);
-    formatRecords.formatter();
-    const formattedRecords = formatRecords.returnFormattedRecords();
+    const formattedRecords = this.recordsFormatter(records);
 
     formattedRecords.map ( (record) => {
       this.bankStatementData.push(record);
     })
 
     this.bankStatementData.push(["date || credit || debit || balance"]);
+  }
+
+  recordsFormatter(records) {
+    const formatBankRecords = new FormatBankRecords(records);
+    formatBankRecords.formatter();
+    return formatBankRecords.returnFormattedRecords();
   }
 
   statement() {

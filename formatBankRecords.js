@@ -1,4 +1,4 @@
-class FormatRecords {
+class FormatBankRecords {
 
   constructor(bank) {
     this.bankRecords = bank.returnRecords();
@@ -37,4 +37,4 @@ class FormatRecords {
   }
 }
 
-module.exports = FormatRecords;
+module.exports = FormatBankRecords;
