@@ -1,3 +1,5 @@
+const FormatRecords = require('./formatRecords');
+
 class BankStatement {
 
   constructor() {
@@ -12,7 +14,7 @@ class BankStatement {
     allRecords.map ( (record) => {
       this.updateBankStatementData(record)
     })
-    
+
     this.bankStatementData.push(["date || credit || debit || balance"]);
   }
 
