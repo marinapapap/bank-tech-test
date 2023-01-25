@@ -19,15 +19,15 @@ class BankStatement {
   }
 
   updateBankStatementData(record) {
-    let updatedRecord = ["", "", ""];
-      this.convertToDecimals(record);
-      
-      updatedRecord[0] = record.date.split("/").join("-");
-      updatedRecord[1] = record.deposit;
-      updatedRecord[2] = record.withdrawal;
-      updatedRecord[3] = record.balance.toFixed(2);
-     
-      this.bankStatementData.push(updatedRecord);
+    let updatedRecord = [];
+    this.convertToDecimals(record);
+    
+    updatedRecord[0] = record.date.split("/").join("-");
+    updatedRecord[1] = record.deposit;
+    updatedRecord[2] = record.withdrawal;
+    updatedRecord[3] = record.balance.toFixed(2);
+    
+    this.bankStatementData.push(updatedRecord);
   }
 
   convertToDecimals(record) {
