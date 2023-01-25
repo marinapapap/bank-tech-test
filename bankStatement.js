@@ -6,10 +6,18 @@ class BankStatement {
   }
 
   addRecords(records) {
+    this.bankStatementData = [];
     const allRecords = records.returnRecords();
 
     allRecords.map ( (record) => {
-      let updatedRecord = ["", "", ""];
+      this.updateBankStatementData(record)
+    })
+    
+    this.bankStatementData.push(["date || credit || debit || balance"]);
+  }
+
+  updateBankStatementData(record) {
+    let updatedRecord = ["", "", ""];
       this.convertToDecimals(record);
       
       updatedRecord[0] = record.date.split("/").join("-");
@@ -17,18 +25,8 @@ class BankStatement {
       updatedRecord[2] = record.withdrawal;
       updatedRecord[3] = record.balance.toFixed(2);
      
-      // this.calculateCurrentBalance(record)
-      // updatedRecord.push(this.total)
       this.bankStatementData.push(updatedRecord);
-    })
-
-    this.bankStatementData.push(["date || credit || debit || balance"]);
   }
-
-  // calculateCurrentBalance(record) {
-  //     this.total += record.deposit; 
-  //     this.total -= record.withdrawal; 
-  // }
 
   convertToDecimals(record) {
     if(Number.isInteger(record.deposit)) {
@@ -43,7 +41,6 @@ class BankStatement {
   }
 
   statement() {
-    // this.bankStatementData.push(this.bankStatementData.shift());
     return this.bankStatementData.map(x =>
         x.join(" || ").replace("  ", " ")
       ).reverse().join("\n");

@@ -33,7 +33,13 @@ To run the tests, run the following command:
 jest
 ```
 
-To run the program, write the following in the node REPL:
+To run the program, open the node REPL using the following command:
+
+```
+node
+```
+
+Then write the following in the node REPL:
 
 ```
 > const Bank = require('./bank');
@@ -46,9 +52,6 @@ You should now be able create instances of both classes, within the REPL, to add
 > console.log(bankStatement.statement());
 ```
 
-_A screenshot of the program being run in the node REPL can be found in the main directory._
-
-
 ## Class Framework
 
 ```javascript
@@ -56,20 +59,21 @@ _A screenshot of the program being run in the node REPL can be found in the main
 class Bank {
 
   constructor() {
-    // the Bank class acts as the "Bank"
+    // the Bank class acts as the "Bank", holding the records of all transactions
   }
 
   deposit(date, value) {
-    // when a value is deposited, the value is placed 2nd in an array
-    // the date is always the first element of the array
+    // when a value is deposited, the arguments are placed in an object with correct keys
+    // the current balance is calculated and also placed in the object
   }
 
   withdrawal(date, value) {
-    // when a value is withdrawn, the value is placed 3rd in an array
+    /// when a value is withdrawn, the arguments are placed in an object with correct keys
+    // the current balance is calculated and also placed in the object
   }
 
-  transaction() {
-    // this function returns the "record", or array, that is stored in the Bank
+  returnRecords() {
+    // this function returns the "records", or array of objects, that are stored in the Bank
   }
 
 }
@@ -77,22 +81,22 @@ class Bank {
 class BankStatement {
 
   constructor() {
-    // the BankStatement class takes the Bank records and accumalates them into one formatted bank statement
+    // the BankStatement class takes the Bank records and formats them into one bank statement
   }
 
-  addTransactionWithCurrentBalance(record) {
+  addRecords(records) {
     // a record is added as an instance of the Bank class
-    // this is then stored in the BankStament class 
-    // with the current balance after this transaction
+    // this is then stored in the BankStament class
+    // delegating to the updateBankStaementData(record) method to update the data stored
   }
 
-  calculateCurrentBalance(record) {
-    // depending on wether the record (array) has a value at the 2nd or 3rd postion 
-    // will determine whether money is added or subtracted from the current balance
+  updateBankStaementData(record) {
+    // takes one iteration of the records from the Bank class and stores it in
+    // the instance variable bankStatementData(record)
   }
 
   convertToDecimals(record) {
-    // converts any numerical value to appear with 2 decimal places
+    // converts any depoist or withdrawal value to appear with 2 decimal places
   }
 
   statement() {
@@ -103,86 +107,7 @@ class BankStatement {
 
 ```
 
-## Bank Class Test Examples
 
-```javascript
-
-const bank = new Bank();
-bank.transaction() => [];
-
-const bank = new Bank();
-bank.deposit("13/01/2023", 1000);
-bank.transaction() => ["13-01-2023", 1000, ""];
-
-const bank = new Bank();
-bank.withdrawal("13/01/2023", 500);
-bank.transaction() => ["13-01-2023", "", 500];
-
-```
-
-## BankStatement Class Test Examples
-
-```javascript
-
-// unit tests
-
-const bankStatement = new BankStatement;
-bankStatement.statement() => "date || credit || debit || balance"
-
-const bankMock = { 
-  transaction() {
-    return ["10-01-2023", 1000, ""];
-  };
-};
-const bankStatement = new BankStatement;
-bankStatement.addTransactionWithCurrentBalance(bankMock); 
-bankStatement.statement() => "date || credit || debit || balance\n10-01-2023 || 1000.00 || || 1000.00"
-
-const bankMock = { 
-  transaction() {
-    return ["14-01-2023", "", 500.00];
-  };
-};
-const bankStatement = new BankStatement;
-bankStatement.addTransactionWithCurrentBalance(bankMock); 
-bankStatement.statement() => "date || credit || debit || balance\n14-01-2023 || ||  500.00 || -500.00"
-
-// integrated tests
-
-const bank = new Bank;
-bank.deposit("10/01/2023", 1000);
-const bankStatement = new BankStatement;
-bankStatement.addTransactionWithCurrentBalance(bank); 
-bankStatement.statement() => "date || credit || debit || balance\n10-01-2023 || 1000.00 || || 1000.00"
-
-const bank = new Bank;
-bank.withdrawal("14/01/2023", 500);
-const bankStatement = new BankStatement;
-bankStatement.addTransactionWithCurrentBalance(bank); 
-bankStatement.statement() => "date || credit || debit || balance\n14-01-2023 ||  || 500.00 || -500.00"
-
-const bank = new Bank;
-bank.deposit("10/01/2023", 1000);
-const bank2 = new Bank;
-bank2.deposit("13/01/2023", 2000);
-const bankStatement = new BankStatement;
-bankStatement.addTransactionWithCurrentBalance(bank); 
-bankStatement.addTransactionWithCurrentBalance(bank2); 
-bankStatement.statement() => "date || credit || debit || balance\n13-01-2023 || 2000.00 || || 3000.00\n10-01-2023 || 1000.00 || || 1000.00"
-
-const bank = new Bank;
-bank.deposit("10/01/2023", 1000);
-const bank2 = new Bank;
-bank2.deposit("13/01/2023", 2000);
-const bank3 = new Bank;
-bank3.withdrawal("14/01/2023", 500);
-const bankStatement = new BankStatement;
-bankStatement.addTransactionWithCurrentBalance(bank); 
-bankStatement.addTransactionWithCurrentBalance(bank2); 
-bankStatement.addTransactionWithCurrentBalance(bank3); 
-bankStatement.statement() => "date || credit || debit || balance\n14-01-2023 || || 500.00 || 2500.00\n13-01-2023 || 2000.00 || || 3000.00\n10-01-2023 || 1000.00 || || 1000.00"
-
-```
 
 
 

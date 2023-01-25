@@ -42,7 +42,7 @@ describe("BankStatement class", () => {
   });
 
   describe("integrated tests", () => {
-    it("takes a deposit from the bank class and returns data formatted on a new line after the headings", () => {
+    it("adds a deposit from the bank class and returns data formatted on a new line after the headings", () => {
       
       const bank = new Bank;
       bank.deposit("10/01/2023", 1000);
@@ -54,7 +54,7 @@ describe("BankStatement class", () => {
 
     });
 
-    it("takes a withdrawal from the bank and returns data formatted on a new line after the headings", () => {
+    it("adds a withdrawal from the bank and returns data formatted on a new line after the headings", () => {
 
       const bank = new Bank;
       bank.withdrawal("14/01/2023", 500);
@@ -66,7 +66,7 @@ describe("BankStatement class", () => {
 
     });
 
-    it("takes two deposits from the bank, returns formatted data with the total balance calculated on each line of the statement", () => {
+    it("adds two deposits from the bank, returns formatted data with each transaction on a new line", () => {
 
       const bank = new Bank;
       bank.deposit("10/01/2023", 1000);
@@ -79,7 +79,7 @@ describe("BankStatement class", () => {
 
     });
 
-    it("takes two deposits and a withdrawal, returns formatted data with the total balance calculated on each line of the statement", () => {
+    it("adds two deposits and a withdrawal, returns formatted data with each transaction of a new line", () => {
 
       const bank = new Bank;
       bank.deposit("10/01/2023", 1000);
@@ -93,7 +93,7 @@ describe("BankStatement class", () => {
 
     });
 
-    it("takes two deposits and a withdrawal, calls statement() twice", () => {
+    it("adds two deposits and a withdrawal, calls statement() twice", () => {
 
       const bank = new Bank;
       bank.deposit("10/01/2023", 1000);
@@ -106,6 +106,25 @@ describe("BankStatement class", () => {
       bankStatement.statement()
 
       expect(bankStatement.statement()).toEqual("date || credit || debit || balance\n14-01-2023 || || 500.00 || 2500.00\n13-01-2023 || 2000.00 || || 3000.00\n10-01-2023 || 1000.00 || || 1000.00");
+
+    });
+
+    it("adds two deposits and a withdrawal, calls statement(), then adds another withdrawal and calls statement again", () => {
+
+      const bank = new Bank;
+      bank.deposit("10/01/2023", 1000);
+      bank.deposit("13/01/2023", 2000);
+      bank.withdrawal("14/01/2023", 500);
+
+      const bankStatement = new BankStatement;
+      bankStatement.addRecords(bank); 
+
+      bank.withdrawal("14/01/2023", 500);
+      bankStatement.addRecords(bank); 
+
+      bankStatement.statement()
+
+      expect(bankStatement.statement()).toEqual("date || credit || debit || balance\n14-01-2023 || || 500.00 || 2000.00\n14-01-2023 || || 500.00 || 2500.00\n13-01-2023 || 2000.00 || || 3000.00\n10-01-2023 || 1000.00 || || 1000.00");
 
     });
   });
