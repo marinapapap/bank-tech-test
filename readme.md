@@ -88,22 +88,39 @@ class BankStatement {
   addRecords(records) {
     // a record is added as an instance of the Bank class
     // this is then stored in the BankStament class
-    // delegating to the updateBankStaementData(record) method to update the data stored
+    // delegating to the recordsFormatter(record) method to format the data stored
   }
 
-  updateBankStaementData(record) {
-    // takes one iteration of the records from the Bank class and stores it in
-    // the instance variable bankStatementData(record)
+  recordsFormatter(records) {
+    // delegates to the FormatRecords class to format the bank records, ready for printing
   }
-
-  convertToDecimals(record) {
-    // converts any depoist or withdrawal value to appear with 2 decimal places
-  }
-
   statement() {
     // the accumalated records are formatted to print as a bank statement
   }
 
+}
+
+class FormatBankRecords {
+
+  constructor(bank) {
+    // this class formats all the bank records so as they are ready
+    // to be printed on a statement slip
+  }
+
+  formatter() {
+    // the formatter is called by the BankStatement class and
+    // it is delegated the role of formatting the bank records
+  }
+
+  convertToDecimals(record) {
+    // this method does the decimal conversion of the deposit
+    // and withdrawal values
+  }
+
+  returnFormattedRecords() {
+    // this method is called by the BankStatement class to
+    // return the formatted records
+  }
 }
 
 ```
