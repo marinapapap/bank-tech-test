@@ -1,5 +1,3 @@
-// const FormatBankRecords = require('./formatBankRecords');
-
 class BankStatement {
   constructor(formatter) {
     this.formatter = formatter;
@@ -20,7 +18,6 @@ class BankStatement {
   }
 
   recordsFormatter() {
-    // const formatBankRecords = new FormatBankRecords(records);
     const formatBankRecords = this.formatter;
     formatBankRecords.formatter();
     return formatBankRecords.returnFormattedRecords();

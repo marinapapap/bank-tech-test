@@ -11,21 +11,17 @@ describe("BankStatement class", () => {
     });
 
     it("Unit test included mock of Bank class. Given a deposit, a formatted statement is returned", () => {
-      const bankMock = {
-        returnRecords() {
-          return [
-            {
-              date: "10-01-2023",
-              deposit: 1000,
-              withdrawal: "",
-              balance: 1000,
-            },
-          ];
+      const FormatterMock = {
+        formatter() {
+          return;
+        },
+        returnFormattedRecords() {
+          return [["10-01-2023", "1000.00", "", "1000.00"]];
         },
       };
 
-      const bankStatement = new BankStatement();
-      bankStatement.addRecords(bankMock);
+      const bankStatement = new BankStatement(FormatterMock);
+      bankStatement.addRecords();
 
       expect(bankStatement.statement()).toEqual(
         "date || credit || debit || balance\n10-01-2023 || 1000.00 || || 1000.00"
@@ -33,16 +29,17 @@ describe("BankStatement class", () => {
     });
 
     it("Unit test included mock of Bank class. Given a withdrawal, a formatted statement is returned", () => {
-      const bankMock = {
-        returnRecords() {
-          return [
-            { date: "14-01-2023", deposit: "", withdrawal: 500, balance: -500 },
-          ];
+      const FormatterMock = {
+        formatter() {
+          return;
+        },
+        returnFormattedRecords() {
+          return [["14-01-2023", "", "500.00", "-500.00"]];
         },
       };
 
-      const bankStatement = new BankStatement();
-      bankStatement.addRecords(bankMock);
+      const bankStatement = new BankStatement(FormatterMock);
+      bankStatement.addRecords();
 
       expect(bankStatement.statement()).toEqual(
         "date || credit || debit || balance\n14-01-2023 || || 500.00 || -500.00"
@@ -57,7 +54,7 @@ describe("BankStatement class", () => {
 
       const formatter = new FormatBankRecords(bank);
       const bankStatement = new BankStatement(formatter);
-      bankStatement.addRecords(bank);
+      bankStatement.addRecords();
 
       expect(bankStatement.statement()).toEqual(
         "date || credit || debit || balance\n10-01-2023 || 1000.00 || || 1000.00"
@@ -70,7 +67,7 @@ describe("BankStatement class", () => {
 
       const formatter = new FormatBankRecords(bank);
       const bankStatement = new BankStatement(formatter);
-      bankStatement.addRecords(bank);
+      bankStatement.addRecords();
 
       expect(bankStatement.statement()).toEqual(
         "date || credit || debit || balance\n14-01-2023 || || 500.00 || -500.00"
@@ -84,7 +81,7 @@ describe("BankStatement class", () => {
 
       const formatter = new FormatBankRecords(bank);
       const bankStatement = new BankStatement(formatter);
-      bankStatement.addRecords(bank);
+      bankStatement.addRecords();
 
       expect(bankStatement.statement()).toEqual(
         "date || credit || debit || balance\n13-01-2023 || 2000.00 || || 3000.00\n10-01-2023 || 1000.00 || || 1000.00"
@@ -99,7 +96,7 @@ describe("BankStatement class", () => {
 
       const formatter = new FormatBankRecords(bank);
       const bankStatement = new BankStatement(formatter);
-      bankStatement.addRecords(bank);
+      bankStatement.addRecords();
 
       expect(bankStatement.statement()).toEqual(
         "date || credit || debit || balance\n14-01-2023 || || 500.00 || 2500.00\n13-01-2023 || 2000.00 || || 3000.00\n10-01-2023 || 1000.00 || || 1000.00"
@@ -114,7 +111,7 @@ describe("BankStatement class", () => {
 
       const formatter = new FormatBankRecords(bank);
       const bankStatement = new BankStatement(formatter);
-      bankStatement.addRecords(bank);
+      bankStatement.addRecords();
 
       bankStatement.statement();
 
@@ -131,10 +128,10 @@ describe("BankStatement class", () => {
 
       const formatter = new FormatBankRecords(bank);
       const bankStatement = new BankStatement(formatter);
-      bankStatement.addRecords(bank);
+      bankStatement.addRecords();
 
       bank.withdrawal("14/01/2023", 500);
-      bankStatement.addRecords(bank);
+      bankStatement.addRecords();
 
       bankStatement.statement();
 
