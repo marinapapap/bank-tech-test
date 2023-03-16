@@ -1,34 +1,36 @@
-const FormatBankRecords = require('./formatBankRecords');
+// const FormatBankRecords = require('./formatBankRecords');
 
 class BankStatement {
-
-  constructor() {
+  constructor(formatter) {
+    this.formatter = formatter;
     this.total = 0;
     this.bankStatementData = [];
   }
 
-  addRecords(records) {
+  addRecords() {
     this.bankStatementData = [];
 
-    const formattedRecords = this.recordsFormatter(records);
+    const formattedRecords = this.recordsFormatter();
 
-    formattedRecords.map ( (record) => {
+    formattedRecords.map((record) => {
       this.bankStatementData.push(record);
-    })
+    });
 
     this.bankStatementData.push(["date || credit || debit || balance"]);
   }
 
-  recordsFormatter(records) {
-    const formatBankRecords = new FormatBankRecords(records);
+  recordsFormatter() {
+    // const formatBankRecords = new FormatBankRecords(records);
+    const formatBankRecords = this.formatter;
     formatBankRecords.formatter();
     return formatBankRecords.returnFormattedRecords();
   }
 
   statement() {
-    return this.bankStatementData.map(x =>
-        x.join(" || ").replace("  ", " ")
-      ).reverse().join("\n");
+    return this.bankStatementData
+      .map((x) => x.join(" || ").replace("  ", " "))
+      .reverse()
+      .join("\n");
   }
 }
 
