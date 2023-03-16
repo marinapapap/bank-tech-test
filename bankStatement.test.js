@@ -68,7 +68,8 @@ describe("BankStatement class", () => {
       const bank = new Bank();
       bank.withdrawal("14/01/2023", 500);
 
-      const bankStatement = new BankStatement();
+      const formatter = new FormatBankRecords(bank);
+      const bankStatement = new BankStatement(formatter);
       bankStatement.addRecords(bank);
 
       expect(bankStatement.statement()).toEqual(
@@ -81,7 +82,8 @@ describe("BankStatement class", () => {
       bank.deposit("10/01/2023", 1000);
       bank.deposit("13/01/2023", 2000);
 
-      const bankStatement = new BankStatement();
+      const formatter = new FormatBankRecords(bank);
+      const bankStatement = new BankStatement(formatter);
       bankStatement.addRecords(bank);
 
       expect(bankStatement.statement()).toEqual(
@@ -95,7 +97,8 @@ describe("BankStatement class", () => {
       bank.deposit("13/01/2023", 2000);
       bank.withdrawal("14/01/2023", 500);
 
-      const bankStatement = new BankStatement();
+      const formatter = new FormatBankRecords(bank);
+      const bankStatement = new BankStatement(formatter);
       bankStatement.addRecords(bank);
 
       expect(bankStatement.statement()).toEqual(
@@ -109,7 +112,8 @@ describe("BankStatement class", () => {
       bank.deposit("13/01/2023", 2000);
       bank.withdrawal("14/01/2023", 500);
 
-      const bankStatement = new BankStatement();
+      const formatter = new FormatBankRecords(bank);
+      const bankStatement = new BankStatement(formatter);
       bankStatement.addRecords(bank);
 
       bankStatement.statement();
@@ -125,7 +129,8 @@ describe("BankStatement class", () => {
       bank.deposit("13/01/2023", 2000);
       bank.withdrawal("14/01/2023", 500);
 
-      const bankStatement = new BankStatement();
+      const formatter = new FormatBankRecords(bank);
+      const bankStatement = new BankStatement(formatter);
       bankStatement.addRecords(bank);
 
       bank.withdrawal("14/01/2023", 500);
